@@ -23,6 +23,18 @@ class LinearRegressionScratch:
                 # Handle empty file case
                 print(e)
                 pass
+
+
+            print(f"Column Count: {column_count}")
+            print(f"Row Count: {row_count}")
+
+            x_train = [[0 for _ in range(column_count - 2)] for _ in range(row_count - 1)]
+            y_train = [0 for _ in range(row_count - 1)]
+
+            for each_row in csv_reader:
+                x_train.append(each_row[:-1])
+                y_train.append(each_row[-1])
+                
         
         print(f"Column Count: {column_count}")
         print(f"Row Count: {row_count}")
