@@ -2,7 +2,6 @@ import csv
 
 class LinearRegressionScratch:
     column_count = 0
-    row_count = 0
 
     def __init__(self, learning_rate, __lambda):
         self.learning_rate = learning_rate
