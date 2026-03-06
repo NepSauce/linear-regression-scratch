@@ -9,7 +9,7 @@ class LinearRegressionScratch:
         self.__lambda = __lambda
 
         # Read CSV file
-        with open('fake_housing_data.csv', 'r') as file:
+        with open('data.csv', 'r') as file:
             csv_reader = csv.reader(file, delimiter=',')
 
             try:
@@ -17,7 +17,7 @@ class LinearRegressionScratch:
                 column_count = len(header)
 
                 if column_count > 0:
-                    row_count = 1
+                    row_count = 0
                     row_count += sum(1 for _ in csv_reader)
 
             except StopIteration as e:
@@ -25,8 +25,8 @@ class LinearRegressionScratch:
                 print(e)
                 pass
         
-        print()(f"Column Count: {column_count}")
-        print()(f"Row Count: {row_count}")
+        print(f"Column Count: {column_count}")
+        print(f"Row Count: {row_count}")
 
         x_train = [[0 for _ in range(column_count)] for _ in range(row_count - 1)]
 
