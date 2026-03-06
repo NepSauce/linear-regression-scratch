@@ -1,11 +1,9 @@
 import csv
 
 class LinearRegressionScratch:
-    column_count = 0
-
-    def __init__(self, learning_rate, w, b, __lambda):
+    def __init__(self, learning_rate, w, b, lambda_):
         self.learning_rate = learning_rate
-        self.__lambda = __lambda
+        self.__lambda = lambda_
         self.x_train = []
         self.y_train = []
         self.w = w
