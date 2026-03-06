@@ -1,12 +1,10 @@
+import csv
+
 class LinearRegressionScratch:
     column_count = 0
     row_count = 0
 
-    x_train = [[0 for _ in range(column_count)] for _ in range(row_count - 1)]
-
-
-    def __init__(self, df, learning_rate, __lambda):
-        self.df = df
+    def __init__(self, learning_rate, __lambda):
         self.learning_rate = learning_rate
         self.__lambda = __lambda
 
@@ -29,10 +27,13 @@ class LinearRegressionScratch:
         
         print()(f"Column Count: {column_count}")
         print()(f"Row Count: {row_count}")
+
         x_train = [[0 for _ in range(column_count)] for _ in range(row_count - 1)]
 
-            # Linear Combination fx_wb_i = np.dot(x, w) + b
+        # Linear Combination fx_wb_i = np.dot(x, w) + b
 
+if __name__ == "__main__":
+    learning_rate = 0.01
+    __lambda = 0.1
 
-
-
+    model = LinearRegressionScratch(learning_rate, __lambda)
