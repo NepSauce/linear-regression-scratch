@@ -14,8 +14,9 @@ class LinearRegressionScratch:
                 row_count = 1
                 row_count += sum(1 for _ in csv_reader)
 
-        except StopIteration:
+        except StopIteration as e:
             # Handle empty file case
+            print(e)
             pass
 
     x_train = [[0 for _ in range(column_count)] for _ in range(row_count - 1)]
