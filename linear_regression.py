@@ -2,8 +2,9 @@ import csv
 
 class LinearRegressionScratch:
     def __init__(self, learning_rate, w, b, lambda_):
+        self.EULERS_CONSTANT = 2.718281828459
         self.learning_rate = learning_rate
-        self.__lambda = lambda_
+        self.lambda_ = lambda_
         self.x_train = []
         self.y_train = []
         self.w = w
@@ -24,6 +25,9 @@ class LinearRegressionScratch:
         self.row_count = len(rows)
 
         return self.column_count, self.row_count
+    
+    def sigmoid(self, z):
+        return 1 / (1 + self.EULERS_CONSTANT ** -z)
     
 if __name__ == "__main__":
     lr = LinearRegressionScratch(0.01, 0, 0, 0.1)
