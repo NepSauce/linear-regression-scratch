@@ -11,26 +11,24 @@ class LinearRegressionScratch:
         self.column_count = 0
         self.row_count = 0
 
-    def read_csv(self, file_path):
+    def get_csv_header(self, file_path):
         with open(file_path, 'r') as file:
             csv_reader = csv.reader(file, delimiter=',')
             header = next(csv_reader)
 
         return header
     
-    def csv_dimensions(self, csv_header):
-        rows = list(csv_header)
-        self.column_count = len(csv_header)
-        self.row_count = len(rows)
-
-        return self.column_count, self.row_count
+    def get_csv_dimensions(self, header, file_path):
+        self.column_count = len(header)
+        self.row_count = sum(1 for _ in open(file_path)) - 1
     
 if __name__ == "__main__":
     lr = LinearRegressionScratch(0.01, 0, 0, 0.1)
-    header = lr.read_csv("data.csv")
-    column_count, row_count = lr.csv_dimensions(header)
+    header = lr.get_csv_header("data.csv")
+    lr.get_csv_dimensions(header, "data.csv")
+    
 
-    print(f"Column Count: {column_count}, Row Count: {row_count}")
+    print(f"Column Count: {lr.column_count}, Row Count: {lr.row_count}")
 
 
 
