@@ -53,7 +53,7 @@ class LinearRegressionScratch:
             for feature_i in range(feature_count):
                 linear_model_prediction += self.w[feature_i] * xi_feature_vector[feature_i]
 
-            # Add the bias term to the linear model prediction
+            # Add the bias term to the model prediction
             linear_model_prediction += self.b
             # Calculate the error between the model prediction and the actual target value
             error = linear_model_prediction - yi_target_value
@@ -74,29 +74,7 @@ class LinearRegressionScratch:
         return w_gradient_vector, b_gradient
 
     def compute_cost(self):
-        example_count = self.row_count
-        feature_count = len(self.w)
-        total_cost = 0.0
-
-        for example_i in range(example_count):
-            xi_feature_vector = self.x_train[example_i]
-            yi_target_value = self.y_train[example_i]
-            linear_model_prediction = 0.0
-
-            for feature_i in range(feature_count):
-                linear_model_prediction += self.w[feature_i] * xi_feature_vector[feature_i]
-
-            linear_model_prediction += self.b
-            error = linear_model_prediction - yi_target_value
-            total_cost += error ** 2
-        
-        mean_squared_error = total_cost / (2 * example_count)
-
-        if self.lambda_ > 0:
-            l2_regularization_cost = (self.lambda_ / (2 * example_count)) * sum(wi ** 2 for wi in self.w)
-            mean_squared_error += l2_regularization_cost
-        
-        return mean_squared_error
+        return None
     
 
  
