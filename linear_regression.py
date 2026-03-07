@@ -104,6 +104,13 @@ class LinearRegressionScratch:
 if __name__ == "__main__":
     lr = LinearRegressionScratch(0.01, 0, 0, 0.1)
     header = lr.load_csv("data.csv")
+
+    compute_cost = lr.compute_cost()
+    print(f"Initial Cost: {compute_cost}")
+
+    compute_gradient = lr.compute_gradient()
+    print(f"Weight Gradients: {compute_gradient[0]}, Bias Gradient: {compute_gradient[1]}")
+    
     
 
     print(f"Column Count: {lr.column_count}, Row Count: {lr.row_count}")
