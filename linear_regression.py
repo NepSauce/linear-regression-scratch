@@ -12,24 +12,29 @@ class LinearRegressionScratch:
     def read_csv(self, file_path):
         with open(file_path, 'r') as file:
             csv_reader = csv.reader(file, delimiter=',')
-
             header = next(csv_reader)
-            self.column_count = len(header)
 
-            rows = list(csv_reader)
-            self.row_count = len(rows)
         return header
     
     def csv_dimensions(self, csv_header):
         rows = list(csv_header)
-
         self.column_count = len(csv_header)
         self.row_count = len(rows)
 
         return self.column_count, self.row_count
+    
+if __name__ == "__main__":
+    lr = LinearRegressionScratch(0.01, 0, 0, 0.1)
+    header = lr.read_csv("data.csv")
+    column_count, row_count = lr.csv_dimensions(header)
 
-            # print(f"Column Count: {self.column_count}")
-            # print(f"Row Count: {self.row_count}")
+    print(f"Column Count: {column_count}, Row Count: {row_count}")
+
+
+
+
+    # print(f"Column Count: {self.column_count}")
+    # print(f"Row Count: {self.row_count}")
 
             # for each_row in rows:
             #     self.x_train.append([float(value) for value in each_row[:-1]])
