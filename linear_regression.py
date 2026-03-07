@@ -9,8 +9,8 @@ class LinearRegressionScratch:
         self.w = w
         self.b = b
 
-        # Read CSV file
-        with open('data.csv', 'r') as file:
+    def read_csv(self, file_path):
+        with open(file_path, 'r') as file:
             csv_reader = csv.reader(file, delimiter=',')
 
             header = next(csv_reader)
@@ -18,18 +18,23 @@ class LinearRegressionScratch:
 
             rows = list(csv_reader)
             self.row_count = len(rows)
+        return header
+    
+    def csv_dimensions(self, csv_header):
+        rows = list(csv_header)
 
+        self.column_count = len(csv_header)
+        self.row_count = len(rows)
 
-            print(f"Column Count: {self.column_count}")
-            print(f"Row Count: {self.row_count}")
+        return self.column_count, self.row_count
 
-            for each_row in rows:
-                self.x_train.append([float(value) for value in each_row[:-1]])
-                self.y_train.append(float(each_row[-1]))
-                
-        
-        print(f"Column Count: {self.column_count}")
-        print(f"Row Count: {self.row_count}")
+            # print(f"Column Count: {self.column_count}")
+            # print(f"Row Count: {self.row_count}")
+
+            # for each_row in rows:
+            #     self.x_train.append([float(value) for value in each_row[:-1]])
+            #     self.y_train.append(float(each_row[-1]))
+
 
         
 
