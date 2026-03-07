@@ -32,9 +32,50 @@ class LinearRegressionScratch:
             print(f"Error loading CSV: {e}")
 
             return None
+        
+    """
+    Computes gradients of the cost function with respect to weights and bias 
+    while including L2 regularization.
+    
+    Returns:
+        dw: list of gradients for each weight
+        db: gradient for bias
+    """
+    
+    def compute_gradient(self):
+        example_count = self.row_count
+        feature_count = len(self.w)
+        w_gradient_vector = [0.0] * feature_count
+        b_gradient = 0.0
+
+        for example_i in range(example_count):
+            xi_feature_vector = self.x_train[example_i]
+            y_i_target_value = self.y_train[example_i]
+            linear_model_prediction = 0.0
+
+            for feature_i in range(feature_count):
+                linear_model_prediction += self.w[feature_i] * xi_feature_vector[feature_i]
+
+            linear_model_prediction += self.b
+            error = linear_model_prediction - y_i_target_value
+
+            for feature_i in range(feature_count):
+                w_gradient_vector[feature_i] += error * xi_feature_vector[feature_i]
+
+                if self.lambda_ > 0:
+                    w_gradient_vector[feature_i] += (self.lambda_ / example_count) * self.w[feature_i]
+            
+            b_gradient += error
+        
+        for feature_i in range(feature_count):
+            w_gradient_vector[feature_i] = w_gradient_vector[feature_i] / example_count
+        
+        b_gradient = b_gradient / example_count
+
+        return w_gradient_vector, b_gradient
     
 
-    
+ 
 if __name__ == "__main__":
     lr = LinearRegressionScratch(0.01, 0, 0, 0.1)
     header = lr.load_csv("data.csv")
