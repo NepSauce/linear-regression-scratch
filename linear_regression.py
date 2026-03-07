@@ -34,14 +34,19 @@ class LinearRegressionScratch:
             return None
         
     def compute_gradient(self):
+        # Assign total number of examples and features
         example_count = self.row_count
         feature_count = len(self.w)
+        # Initialize gradients for weights and bias
         w_gradient_vector = [0.0] * feature_count
         b_gradient = 0.0
 
+        # Loop through each training example to compute the prediction, error, and accumulate gradients
         for example_i in range(example_count):
+            # Extract the feature vector and target value for the current example
             xi_feature_vector = self.x_train[example_i]
             yi_target_value = self.y_train[example_i]
+            # Initialize model preduction as 0.0
             linear_model_prediction = 0.0
 
             for feature_i in range(feature_count):
