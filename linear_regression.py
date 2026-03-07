@@ -33,15 +33,6 @@ class LinearRegressionScratch:
 
             return None
         
-    """
-    Computes gradients of the cost function with respect to weights and bias 
-    while including L2 regularization.
-    
-    Returns:
-        dw: list of gradients for each weight
-        db: gradient for bias
-    """
-    
     def compute_gradient(self):
         example_count = self.row_count
         feature_count = len(self.w)
@@ -114,11 +105,3 @@ if __name__ == "__main__":
     
 
     print(f"Column Count: {lr.column_count}, Row Count: {lr.row_count}")
-    # for each_row in rows:
-    #     self.x_train.append([float(value) for value in each_row[:-1]])
-    #     self.y_train.append(float(each_row[-1]))
-
-
-        
-
-    # Linear Combination fx_wb_i = w1*x1 + w2*x2 + ... + wn*xn + b
