@@ -8,6 +8,8 @@ class LinearRegressionScratch:
         self.y_train = []
         self.w = w
         self.b = b
+        self.column_count = 0
+        self.row_count = 0
 
     def read_csv(self, file_path):
         with open(file_path, 'r') as file:
