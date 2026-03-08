@@ -58,17 +58,22 @@ class LinearRegressionScratch:
             # Calculate the error between the model prediction and the actual target value
             error = linear_model_prediction - yi_target_value
 
+            # Update the gradients for weights by multiplying the error with the corresponding feature value and accumulating it
             for feature_i in range(feature_count):
                 w_gradient_vector[feature_i] += error * xi_feature_vector[feature_i]
 
+                # If regularization is applied, add the regularization term to the weight gradient
                 if self.lambda_ > 0:
                     w_gradient_vector[feature_i] += (self.lambda_ / example_count) * self.w[feature_i]
             
+            # Update the bias gradient by adding the error
             b_gradient += error
         
+        # Average the gradients by dividing by the number of examples
         for feature_i in range(feature_count):
             w_gradient_vector[feature_i] = w_gradient_vector[feature_i] / example_count
         
+        # Average the bias gradient by dividing by the number of examples
         b_gradient = b_gradient / example_count
 
         return w_gradient_vector, b_gradient
