@@ -134,7 +134,7 @@ class LinearRegressionScratch:
         for iteration in range(iterations):
             self.gradient_descent_step()
 
-            if (iteration + 1) % 100 == 0:
+            if iteration  % 100 == 0:
                 cost = self.compute_cost()
                 print(f"Iteration {iteration + 1}/{iterations}, Cost: {cost}")
 
