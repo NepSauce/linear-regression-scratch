@@ -138,10 +138,8 @@ class LinearRegressionScratch:
                 cost = self.compute_cost()
                 print(f"Iteration {iteration + 1}/{iterations}, Cost: {cost}")
 
-            
-
 if __name__ == "__main__":
-    lr = LinearRegressionScratch(0.1, 0, 0, 0.1)
+    lr = LinearRegressionScratch(0.001, 0, 0, 0.1)
     header = lr.load_csv("data.csv")
 
     compute_cost = lr.compute_cost()
