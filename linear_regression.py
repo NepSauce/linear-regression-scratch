@@ -61,10 +61,6 @@ class LinearRegressionScratch:
             # Update the gradients for weights by multiplying the error with the corresponding feature value and accumulating it
             for feature_i in range(feature_count):
                 w_gradient_vector[feature_i] += error * xi_feature_vector[feature_i]
-
-                # If regularization is applied, add the regularization term to the weight gradient
-                if self.lambda_ > 0:
-                    w_gradient_vector[feature_i] += (self.lambda_ / example_count) * self.w[feature_i]
             
             # Update the bias gradient by adding the error
             b_gradient += error
@@ -72,6 +68,10 @@ class LinearRegressionScratch:
         # Average the gradients by dividing by the number of examples
         for feature_i in range(feature_count):
             w_gradient_vector[feature_i] = w_gradient_vector[feature_i] / example_count
+
+            # If regularization is applied, add the regularization term to the weight gradient
+            if self.lambda_ > 0:
+                w_gradient_vector[feature_i] += (self.lambda_ / example_count) * self.w[feature_i]
         
         # Average the bias gradient by dividing by the number of examples
         b_gradient = b_gradient / example_count
@@ -128,19 +128,31 @@ class LinearRegressionScratch:
         
         # Update the bias by subtracting the product of learning rate and bias gradient from the current bias
         self.b -= self.learning_rate * b_gradient
+    
+    def train_model(self, iterations):
+        # Loop for the specified number of iterations to perform gradient descent steps
+        for iteration in range(iterations):
+            self.gradient_descent_step()
+
+            if (iteration + 1) % 100 == 0:
+                cost = self.compute_cost()
+                print(f"Iteration {iteration + 1}/{iterations}, Cost: {cost}")
 
             
 
 if __name__ == "__main__":
-    lr = LinearRegressionScratch(0.01, 0, 0, 0.1)
+    lr = LinearRegressionScratch(0.1, 0, 0, 0.1)
     header = lr.load_csv("data.csv")
 
     compute_cost = lr.compute_cost()
     print(f"Initial Cost: {compute_cost}")
 
-    compute_gradient = lr.compute_gradient()
-    print(f"Weight Gradients: {compute_gradient[0]}, Bias Gradient: {compute_gradient[1]}")
-    
+    lr.train_model(1000)
+
+    final_cost = lr.compute_cost()
+    print(f"Final Cost: {final_cost}")
+
+    print(f"Weights: {lr.w}, Bias: {lr.b}")
     
 
     print(f"Column Count: {lr.column_count}, Row Count: {lr.row_count}")
