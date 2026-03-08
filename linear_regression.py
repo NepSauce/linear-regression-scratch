@@ -117,6 +117,17 @@ class LinearRegressionScratch:
             average_squared_cost += (self.lambda_ / (2 * example_count)) * sum_squared_weights
 
         return average_squared_cost
+    
+    def gradient_descent_step(self):
+        # Compute the gradients for weights and bias
+        w_gradient_vector, b_gradient = self.compute_gradient()
+
+        # Update the weights by subtracting the product of learning rate and weight gradients from the current weights
+        for feature_i in range(len(self.w)):
+            self.w[feature_i] -= self.learning_rate * w_gradient_vector[feature_i]
+        
+        # Update the bias by subtracting the product of learning rate and bias gradient from the current bias
+        self.b -= self.learning_rate * b_gradient
 
             
 
