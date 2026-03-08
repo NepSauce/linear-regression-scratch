@@ -79,10 +79,47 @@ class LinearRegressionScratch:
         return w_gradient_vector, b_gradient
 
     def compute_cost(self):
-        return None
-    
+        # Extract the total number of examples and features from the training data
+        example_count = self.row_count
+        feature_count = len(self.w)
+        # Initialize the total cost to 0.0
+        total_squared_cost = 0.0
 
- 
+        # Loop through each training example to compute the prediction and accumulate the squared cost
+        for example_i in range(example_count):
+            # Extract the feature vector and target value for the current example
+            xi_feature_vector = self.x_train[example_i]
+            yi_target_value = self.y_train[example_i]
+            # Initialize model prediction as 0.0
+            linear_model_prediction = 0.0
+
+            # Compute the linear model prediction by summing the product of weights and features
+            for feature_i in range(feature_count):
+                linear_model_prediction += self.w[feature_i] * xi_feature_vector[feature_i]
+
+            # Add the bias term to the model prediction
+            linear_model_prediction += self.b
+            # Calculate the error between the model prediction and the actual target value
+            error = linear_model_prediction - yi_target_value
+            # Accumulate the squared cost by adding the square of the error
+            total_squared_cost += error ** 2
+        
+        # Average the total squared cost by dividing by twice the number of examples
+        average_squared_cost = total_squared_cost / (2 * example_count)
+
+        # If regularization is applied, compute the regularization cost and add it to the average squared cost
+        if self.lambda_ > 0:
+            sum_squared_weights = 0.0
+
+            for feature_i in range(feature_count):
+                sum_squared_weights += self.w[feature_i] ** 2
+            
+            average_squared_cost += (self.lambda_ / (2 * example_count)) * sum_squared_weights
+
+        return average_squared_cost
+
+            
+
 if __name__ == "__main__":
     lr = LinearRegressionScratch(0.01, 0, 0, 0.1)
     header = lr.load_csv("data.csv")
