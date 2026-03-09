@@ -149,7 +149,3 @@ optimizer = torch.optim.SGD(params, lr=0.01)
 
 
 ---
-
-This file is meant to accompany the code in the repository (`linear_regression.py` and `prediction_accuracy.py`). If you want, I can add runnable examples and a small script that runs a lambda sweep and plots validation error.
-# linear-regression-scratch
-Implementing Linear Regression from scratch as practice
