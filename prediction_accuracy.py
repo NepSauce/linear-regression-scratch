@@ -30,8 +30,23 @@ class PredictionAccuracy:
                 print(f'Epoch {epoch}/{epochs}, Loss: {loss.item()}')
 
 
-    def compute_prediction_accuracy(self):
-        new_house = torch.tensor([[2500, 4, 5]], dtype=torch.float32)
-        prediction = self.model(new_house)
+    def predict(self, x_vector):
+        # x_vector: list or iterable of 3 feature values
+        if not isinstance(x_vector, torch.Tensor):
+            new_house = torch.tensor([x_vector], dtype=torch.float32)
+        else:
+            new_house = x_vector.view(1, -1).to(torch.float32)
 
-        print(f'Predicted price: {prediction.item()}')
+        self.model.eval()
+        with torch.no_grad():
+            prediction = self.model(new_house)
+
+        return float(prediction.item())
+
+    def compute_prediction_accuracy(self, x_vector=None):
+        if x_vector is None:
+            x_vector = [2500, 4, 5]
+
+        pred = self.predict(x_vector)
+        print(f'Predicted price: {pred}')
+        return pred

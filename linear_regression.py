@@ -129,6 +129,15 @@ class LinearRegressionScratch:
         # Update the bias by subtracting the product of learning rate and bias gradient from the current bias
         self.b -= self.learning_rate * b_gradient
     
+    def predict(self, x_vector):
+        # x_vector: list or iterable of feature values
+        result = 0.0
+        for i in range(len(self.w)):
+            result += self.w[i] * float(x_vector[i])
+
+        result += self.b
+
+        return float(result)
     def train_model(self, iterations):
         # Loop for the specified number of iterations to perform gradient descent steps
         for iteration in range(iterations):
@@ -142,15 +151,30 @@ if __name__ == "__main__":
     lr = LinearRegressionScratch(0.001, 0, 0, 0.1)
     header = lr.load_csv("data.csv")
 
-    compute_cost = lr.compute_cost()
-    print(f"Initial Cost: {compute_cost}")
+    print(f"Column Count: {lr.column_count}, Row Count: {lr.row_count}")
+
+    print(f"Initial Cost: {lr.compute_cost()}")
 
     lr.train_model(1000)
 
-    final_cost = lr.compute_cost()
-    print(f"Final Cost: {final_cost}")
+    print(f"Final Cost: {lr.compute_cost()}")
 
     print(f"Weights: {lr.w}, Bias: {lr.b}")
-    
 
-    print(f"Column Count: {lr.column_count}, Row Count: {lr.row_count}")
+    # Compare with PyTorch implementation
+    try:
+        from prediction_accuracy import PredictionAccuracy
+
+        pa = PredictionAccuracy(learning_rate=0.001)
+        pa.train(1000)
+
+        sample = [2500, 4, 5]
+        scratch_pred = lr.predict(sample)
+        torch_pred = pa.predict(sample)
+
+        print(f"Scratch prediction: {scratch_pred}")
+        print(f"Torch prediction: {torch_pred}")
+        print(f"Absolute difference: {abs(scratch_pred - torch_pred)}")
+
+    except Exception as e:
+        print(f"Could not compare with torch model: {e}")
